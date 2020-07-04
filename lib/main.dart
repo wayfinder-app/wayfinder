@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 
 void main() {
   runApp(MyApp());
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget {
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
+
       home: MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
@@ -78,6 +80,7 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
+
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
         child: Column(
@@ -104,6 +107,17 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_counter',
               style: Theme.of(context).textTheme.headline4,
             ),
+            Container(
+              child: RaisedButton(
+                child: Text('Button'),
+                onPressed:(){
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ScreenSwipe()),
+                  );
+                }
+              )
+            )
           ],
         ),
       ),
@@ -112,6 +126,115 @@ class _MyHomePageState extends State<MyHomePage> {
         tooltip: 'Increment',
         child: Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
+
+    );
+  }
+}
+
+class ScreenSwipe extends StatelessWidget{
+  @override
+  Widget build (BuildContext ctxt){
+    return new Scaffold(
+      body: PageView(
+        children:<Widget>[
+          Container(
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                Text("Ethan getting laid"),
+                Text("yeah its happening"),
+                ]
+              ),
+            ),
+            color:Colors.red,
+          ),
+          Container(
+            child: Center(child:Text("Page 2")),
+            color:Colors.blue,
+          ),
+          Container(
+            child: Center(child:Text("Page 3")),
+            color:Colors.purple,
+          ),
+          Container(
+            child: Center(child:Text("Page 4")),
+            color:Colors.green,
+          )
+        ]
+      )
+    );
+  }
+}
+
+class SwipeTest extends StatelessWidget{
+  @override
+  Widget build (BuildContext ctxt){
+    return new Scaffold(
+      appBar: new AppBar(
+        title: new Text("Swipe implementation"),
+      ),
+      body: new Slidable(
+        actionPane: SlidableDrawerActionPane(),
+        actionExtentRatio: 0.25,
+        child: new Column(
+          children: [
+            new Container(
+              color: Colors.white,
+              child: new ListTile(
+                leading: new CircleAvatar(
+                  backgroundColor: Colors.indigoAccent,
+                  child: new Text('Test'),
+                  foregroundColor: Colors.white,
+                ),
+                title: new Text('Ethan Getting Laid'),
+                subtitle: new Text('Description of him getting laid'),
+              ),
+            ),
+            new Container(
+              color: Colors.white,
+              child: new ListTile(
+                leading: new CircleAvatar(
+                  backgroundColor: Colors.orangeAccent,
+                  child: new Text('Test'),
+                  foregroundColor: Colors.white,
+                ),
+                title: new Text('Alvin Getting Laid'),
+                subtitle: new Text('Alvin has hella girls'),
+              ),
+            ),
+          ]
+        ),
+        actions: <Widget>[
+          new IconSlideAction(
+            caption: 'Refresh',
+            color: Colors.blue,
+            icon: Icons.archive,
+          ),
+          new IconSlideAction(
+            caption: 'Dislike',
+            color: Colors.red,
+            icon: Icons.share,
+          ),
+        ],
+        secondaryActions: <Widget>[
+          new IconSlideAction(
+            caption: 'Like',
+            color: Colors.black45,
+            icon: Icons.more_horiz,
+          ),
+          new IconSlideAction(
+            caption: 'Bookmark',
+            color: Colors.indigo,
+            icon: Icons.delete,
+          ),
+          new IconSlideAction(
+            caption: 'Share',
+            color: Colors.green,
+            icon: Icons.delete,
+          )
+        ],
+      ),
     );
   }
 }
