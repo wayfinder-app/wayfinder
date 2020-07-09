@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:postgres/postgres.dart';
 
 void main() {
+  testDB();
   runApp(MyApp());
 }
 
+void testDB() async{
+  var connection = new PostgreSQLConnection("wayfinder.cffk9owwfms1.us-west-1.rds.amazonaws.com", 5432, "postgres", username: "wayfinderadmin", password: "n0m0r3bor3d0m");
+  await connection.open();
+}
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
@@ -135,6 +141,7 @@ class ScreenSwipe extends StatelessWidget{
   @override
   Widget build (BuildContext ctxt){
     return new Scaffold(
+
       body: PageView(
         children:<Widget>[
           Container(
